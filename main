@@ -1,0 +1,637 @@
+#pragma once
+
+#include <string>
+
+
+namespace laba32 {
+
+	using namespace System;
+	using namespace System::ComponentModel;
+	using namespace System::Collections;
+	using namespace System::Windows::Forms;
+	using namespace System::Data;
+	using namespace System::Drawing;
+
+	/// <summary>
+	/// Сводка для matrix
+	/// </summary>
+	public ref class matrix : public System::Windows::Forms::Form
+	{
+	public:
+		matrix(void)
+		{
+			InitializeComponent();
+			//
+			//TODO: добавьте код конструктора
+			//
+		}
+
+	protected:
+		/// <summary>
+		/// Освободить все используемые ресурсы.
+		/// </summary>
+		~matrix()
+		{
+			if (components)
+			{
+				delete components;
+			}
+		}
+	private: System::Windows::Forms::DataGridView^ main_grid;
+	
+	private: System::Windows::Forms::TextBox^ kol_str;
+	private: System::Windows::Forms::TextBox^ kol_stlb;
+
+
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Button^ refresh;
+	private: System::Windows::Forms::Label^ ANGRY_BUTTON;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Button^ check_but;
+
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ rez;
+	private: System::Windows::Forms::Label^ not_full_label;
+	private: System::Windows::Forms::Button^ clear_button;
+	private: System::Windows::Forms::Label^ task_label;
+	private: System::Windows::Forms::Label^ ANGRY_BUTTON_0;
+
+
+
+
+	private: System::Windows::Forms::Button^ random_button;
+ 
+	private: 
+
+		int colons; int stroks;
+
+
+		void random_matrix()
+		{
+			int start = 0;
+			int end = 10;
+			for (int i = 0; i < stroks; i++)
+				for (int j = 0; j < colons; j++)
+					main_grid->Rows[i]->Cells[j]->Value = rand() % (end - start + 1) + start;
+		}
+
+		bool task()
+		{
+			unsigned int kol_up = 0;
+			bool is_up = true;
+			for (int j = 0; j < colons; j++)
+			{
+				for (int i = 1; i < stroks; i++)
+					if ((Convert::ToInt32(main_grid->Rows[i]->Cells[j]->Value)) < (Convert::ToInt32(main_grid->Rows[i - 1]->Cells[j]->Value)))
+					{
+						is_up = false;
+						break;
+					}
+				if (is_up) kol_up++;
+				is_up = true;
+			}
+			
+			return(kol_up == 2);
+		}
+
+		void deactive_buttons()
+		{
+			refresh->Enabled = false;
+			random_button->Enabled = false;
+			check_but->Enabled = false;
+			clear_button->Enabled = false;
+		}
+
+		void active_buttons()
+		{
+			refresh->Enabled = true;
+			random_button->Enabled = true;
+			check_but->Enabled = true;
+			clear_button->Enabled = true;
+		}
+
+		
+
+	protected:
+
+	protected:
+
+	protected:
+
+	private:
+		/// <summary>
+		/// Обязательная переменная конструктора.
+		/// </summary>
+		System::ComponentModel::Container ^components;
+
+#pragma region Windows Form Designer generated code
+		/// <summary>
+		/// Требуемый метод для поддержки конструктора — не изменяйте 
+		/// содержимое этого метода с помощью редактора кода.
+		/// </summary>
+		void InitializeComponent(void)
+		{
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle3 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			System::Windows::Forms::DataGridViewCellStyle^ dataGridViewCellStyle4 = (gcnew System::Windows::Forms::DataGridViewCellStyle());
+			this->main_grid = (gcnew System::Windows::Forms::DataGridView());
+			this->kol_str = (gcnew System::Windows::Forms::TextBox());
+			this->kol_stlb = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->refresh = (gcnew System::Windows::Forms::Button());
+			this->random_button = (gcnew System::Windows::Forms::Button());
+			this->ANGRY_BUTTON = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->check_but = (gcnew System::Windows::Forms::Button());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->rez = (gcnew System::Windows::Forms::Label());
+			this->not_full_label = (gcnew System::Windows::Forms::Label());
+			this->clear_button = (gcnew System::Windows::Forms::Button());
+			this->task_label = (gcnew System::Windows::Forms::Label());
+			this->ANGRY_BUTTON_0 = (gcnew System::Windows::Forms::Label());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->main_grid))->BeginInit();
+			this->SuspendLayout();
+			// 
+			// main_grid
+			// 
+			this->main_grid->AllowUserToAddRows = false;
+			this->main_grid->AllowUserToDeleteRows = false;
+			dataGridViewCellStyle3->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			dataGridViewCellStyle3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			dataGridViewCellStyle3->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle3->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			dataGridViewCellStyle3->SelectionForeColor = System::Drawing::Color::Black;
+			this->main_grid->AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+			this->main_grid->BackgroundColor = System::Drawing::Color::NavajoWhite;
+			this->main_grid->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->main_grid->CellBorderStyle = System::Windows::Forms::DataGridViewCellBorderStyle::None;
+			this->main_grid->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->main_grid->ColumnHeadersVisible = false;
+			dataGridViewCellStyle4->Alignment = System::Windows::Forms::DataGridViewContentAlignment::MiddleLeft;
+			dataGridViewCellStyle4->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(192)));
+			dataGridViewCellStyle4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8.25F, System::Drawing::FontStyle::Regular,
+				System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(204)));
+			dataGridViewCellStyle4->ForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle4->SelectionBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(255)),
+				static_cast<System::Int32>(static_cast<System::Byte>(255)), static_cast<System::Int32>(static_cast<System::Byte>(128)));
+			dataGridViewCellStyle4->SelectionForeColor = System::Drawing::Color::Black;
+			dataGridViewCellStyle4->WrapMode = System::Windows::Forms::DataGridViewTriState::False;
+			this->main_grid->DefaultCellStyle = dataGridViewCellStyle4;
+			this->main_grid->GridColor = System::Drawing::Color::White;
+			this->main_grid->Location = System::Drawing::Point(12, 79);
+			this->main_grid->Name = L"main_grid";
+			this->main_grid->RowHeadersVisible = false;
+			this->main_grid->RowHeadersWidth = 10;
+			this->main_grid->Size = System::Drawing::Size(544, 420);
+			this->main_grid->TabIndex = 0;
+			this->main_grid->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &matrix::main_grid_CellValueChanged);
+			//this->main_grid->ColumnAdded += gcnew System::Windows::Forms::DataGridViewColumnEventHandler(this, &matrix::main_grid_ColumnAdded);
+			//this->main_grid->RowsAdded += gcnew System::Windows::Forms::DataGridViewRowsAddedEventHandler(this, &matrix::main_grid_RowsAdded);
+			// 
+			// kol_str
+			// 
+			this->kol_str->Location = System::Drawing::Point(76, 40);
+			this->kol_str->Name = L"kol_str";
+			this->kol_str->Size = System::Drawing::Size(51, 20);
+			this->kol_str->TabIndex = 1;
+			this->kol_str->TextChanged += gcnew System::EventHandler(this, &matrix::kol_str_TextChanged);
+			// 
+			// kol_stlb
+			// 
+			this->kol_stlb->Location = System::Drawing::Point(379, 40);
+			this->kol_stlb->Name = L"kol_stlb";
+			this->kol_stlb->Size = System::Drawing::Size(55, 20);
+			this->kol_stlb->TabIndex = 2;
+			this->kol_stlb->TextChanged += gcnew System::EventHandler(this, &matrix::kol_stlb_TextChanged);
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(54, 9);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(98, 13);
+			this->label1->TabIndex = 3;
+			this->label1->Text = L"Количество строк";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(357, 9);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(116, 13);
+			this->label2->TabIndex = 4;
+			this->label2->Text = L"Количество столбцов";
+			// 
+			// refresh
+			// 
+			this->refresh->BackColor = System::Drawing::Color::DarkSalmon;
+			this->refresh->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->refresh->Location = System::Drawing::Point(205, 38);
+			this->refresh->Name = L"refresh";
+			this->refresh->Size = System::Drawing::Size(98, 23);
+			this->refresh->TabIndex = 5;
+			this->refresh->Text = L"Пересобрать";
+			this->refresh->UseVisualStyleBackColor = false;
+			this->refresh->Click += gcnew System::EventHandler(this, &matrix::refresh_Click);
+			// 
+			// random_button
+			// 
+			this->random_button->BackColor = System::Drawing::Color::Khaki;
+			this->random_button->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->random_button->Location = System::Drawing::Point(591, 91);
+			this->random_button->Name = L"random_button";
+			this->random_button->Size = System::Drawing::Size(245, 23);
+			this->random_button->TabIndex = 6;
+			this->random_button->Text = L"Заполнить случайными числами";
+			this->random_button->UseVisualStyleBackColor = false;
+			this->random_button->Click += gcnew System::EventHandler(this, &matrix::random_button_Click);
+			// 
+			// ANGRY_BUTTON
+			// 
+			this->ANGRY_BUTTON->AutoSize = true;
+			this->ANGRY_BUTTON->BackColor = System::Drawing::Color::Red;
+			this->ANGRY_BUTTON->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->ANGRY_BUTTON->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->ANGRY_BUTTON->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->ANGRY_BUTTON->Location = System::Drawing::Point(632, 45);
+			this->ANGRY_BUTTON->Name = L"ANGRY_BUTTON";
+			this->ANGRY_BUTTON->Size = System::Drawing::Size(153, 22);
+			this->ANGRY_BUTTON->TabIndex = 7;
+			this->ANGRY_BUTTON->Text = L"ВВЕДИТЕ ЧИСЛО!";
+			this->ANGRY_BUTTON->Visible = false;
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->ForeColor = System::Drawing::Color::Black;
+			this->label3->Location = System::Drawing::Point(809, 9);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(37, 13);
+			this->label3->TabIndex = 8;
+			this->label3->Text = L"khIDB";
+			// 
+			// check_but
+			// 
+			this->check_but->BackColor = System::Drawing::Color::Khaki;
+			this->check_but->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->check_but->Location = System::Drawing::Point(591, 137);
+			this->check_but->Name = L"check_but";
+			this->check_but->Size = System::Drawing::Size(245, 23);
+			this->check_but->TabIndex = 9;
+			this->check_but->Text = L"Проверить по задаче";
+			this->check_but->UseVisualStyleBackColor = false;
+			this->check_but->Click += gcnew System::EventHandler(this, &matrix::check_but_Click);
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->label4->Location = System::Drawing::Point(562, 266);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(61, 20);
+			this->label4->TabIndex = 10;
+			this->label4->Text = L"Ответ:";
+			// 
+			// rez
+			// 
+			this->rez->AutoSize = true;
+			this->rez->BackColor = System::Drawing::Color::Yellow;
+			this->rez->Cursor = System::Windows::Forms::Cursors::AppStarting;
+			this->rez->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 60, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->rez->ForeColor = System::Drawing::Color::Yellow;
+			this->rez->Location = System::Drawing::Point(646, 223);
+			this->rez->Name = L"rez";
+			this->rez->Size = System::Drawing::Size(154, 91);
+			this->rez->TabIndex = 11;
+			this->rez->Text = L"ДА";
+			// 
+			// not_full_label
+			// 
+			this->not_full_label->AutoSize = true;
+			this->not_full_label->BackColor = System::Drawing::Color::Red;
+			this->not_full_label->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->not_full_label->ForeColor = System::Drawing::SystemColors::ControlLightLight;
+			this->not_full_label->Location = System::Drawing::Point(601, 381);
+			this->not_full_label->Name = L"not_full_label";
+			this->not_full_label->Size = System::Drawing::Size(184, 20);
+			this->not_full_label->TabIndex = 12;
+			this->not_full_label->Text = L"Таблица не заполнена!";
+			this->not_full_label->Visible = false;
+			// 
+			// clear_button
+			// 
+			this->clear_button->BackColor = System::Drawing::Color::Khaki;
+			this->clear_button->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->clear_button->Location = System::Drawing::Point(591, 178);
+			this->clear_button->Name = L"clear_button";
+			this->clear_button->Size = System::Drawing::Size(245, 23);
+			this->clear_button->TabIndex = 13;
+			this->clear_button->Text = L"Очистить";
+			this->clear_button->UseVisualStyleBackColor = false;
+			this->clear_button->Click += gcnew System::EventHandler(this, &matrix::clear_button_Click);
+			// 
+			// task_label
+			// 
+			this->task_label->AutoSize = true;
+			this->task_label->Location = System::Drawing::Point(588, 450);
+			this->task_label->Name = L"task_label";
+			this->task_label->Size = System::Drawing::Size(10, 13);
+			this->task_label->TabIndex = 14;
+			this->task_label->Text = L"f";
+			// 
+			// ANGRY_BUTTON_0
+			// 
+			this->ANGRY_BUTTON_0->AutoSize = true;
+			this->ANGRY_BUTTON_0->BackColor = System::Drawing::Color::Red;
+			this->ANGRY_BUTTON_0->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
+			this->ANGRY_BUTTON_0->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->ANGRY_BUTTON_0->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
+			this->ANGRY_BUTTON_0->Location = System::Drawing::Point(632, 23);
+			this->ANGRY_BUTTON_0->Name = L"ANGRY_BUTTON_0";
+			this->ANGRY_BUTTON_0->Size = System::Drawing::Size(177, 22);
+			this->ANGRY_BUTTON_0->TabIndex = 15;
+			this->ANGRY_BUTTON_0->Text = L"ВВЕДИТЕ БОЛЬШЕ 0!";
+			this->ANGRY_BUTTON_0->Visible = false;
+			// 
+			// matrix
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::NavajoWhite;
+			this->ClientSize = System::Drawing::Size(858, 538);
+			this->Controls->Add(this->ANGRY_BUTTON_0);
+			this->Controls->Add(this->task_label);
+			this->Controls->Add(this->clear_button);
+			this->Controls->Add(this->not_full_label);
+			this->Controls->Add(this->rez);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->check_but);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->ANGRY_BUTTON);
+			this->Controls->Add(this->random_button);
+			this->Controls->Add(this->refresh);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->kol_stlb);
+			this->Controls->Add(this->kol_str);
+			this->Controls->Add(this->main_grid);
+			this->Name = L"matrix";
+			this->Text = L"matrix";
+			this->Load += gcnew System::EventHandler(this, &matrix::matrix_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->main_grid))->EndInit();
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
+		}
+#pragma endregion
+
+
+
+	private: System::Void matrix_Load(System::Object^ sender, System::EventArgs^ e)
+	{
+		stroks = 2;
+		colons = 3;
+
+		main_grid->RowCount = stroks;
+		main_grid->ColumnCount = colons;
+
+		kol_str->Text = Convert::ToString(stroks);
+		kol_stlb->Text = Convert::ToString(colons);
+		
+		random_matrix();
+
+		task_label->Text = "Дана матрица MxN, \n верно ли, что ровно 2 столбца этой матрицы \n упорядочены по возрастанию ?";
+	}
+	
+
+
+
+	private: System::Void kol_str_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+	{
+		try
+		{
+			deactive_buttons();
+			refresh->Enabled = true;
+
+			main_grid->Enabled = true;
+			
+			ANGRY_BUTTON->Visible = false;
+			ANGRY_BUTTON_0->Visible = false;
+			kol_stlb->Enabled = true;
+
+			rez->ForeColor = System::Drawing::Color::Yellow;
+
+			if (Convert::ToInt32(kol_str->Text) <= 0) throw 6;
+
+			stroks = Convert::ToInt32(kol_str->Text);
+			
+
+		}
+		catch (int)
+		{
+			
+			ANGRY_BUTTON_0->Visible = true;
+			kol_stlb->Enabled = false;
+			refresh->Enabled = false;
+			main_grid->Enabled = false;
+			
+		}
+		catch (...)
+		{
+			ANGRY_BUTTON->Visible = true;
+			kol_stlb->Enabled = false;
+			refresh->Enabled = false;
+			main_grid->Enabled = false;
+		}
+	}
+
+	private: System::Void kol_stlb_TextChanged(System::Object^ sender, System::EventArgs^ e) 
+	{		
+		try
+		{
+			deactive_buttons();
+			refresh->Enabled = true;
+
+			main_grid->Enabled = true;
+
+			ANGRY_BUTTON->Visible = false;
+			ANGRY_BUTTON_0->Visible = false;
+			kol_str->Enabled = true;
+
+			rez->ForeColor = System::Drawing::Color::Yellow;
+			
+			if (Convert::ToInt32(kol_stlb->Text) <= 0) throw 6;
+
+			colons = Convert::ToInt32(kol_stlb->Text);
+			
+			
+
+		}
+		catch (int)
+		{
+		
+			ANGRY_BUTTON_0->Visible = true;
+			kol_str->Enabled = false;
+			refresh->Enabled = true;
+			main_grid->Enabled = false;
+		
+		}
+		catch (...)
+		{
+			ANGRY_BUTTON->Visible = true;
+			refresh->Enabled = true;
+			kol_str->Enabled = false;
+			main_grid->Enabled = false;
+		}
+	}
+
+	private: System::Void refresh_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		try
+		{
+			not_full_label->Visible = false;
+			main_grid->RowCount = stroks;
+			main_grid->ColumnCount = colons;
+
+			active_buttons();
+			refresh->Enabled = false;
+
+			for (int i = 0; i < stroks; i++)
+				for (int j = 0; j < colons; j++)
+				{
+					if (main_grid->Rows[i]->Cells[j]->Value == nullptr)
+						throw 7;
+					Convert::ToInt32(main_grid->Rows[i]->Cells[j]->Value);
+				}
+			
+		}
+		catch (int)
+		{
+			not_full_label->Visible = true;
+			check_but->Enabled = false;
+		}
+		catch (...)
+		{
+			ANGRY_BUTTON->Visible = true;
+			check_but->Enabled = false;
+		}
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			try
+			{
+				for (int i = 0; i < stroks; i++)
+					for (int j = 0; j < colons; j++)
+					{
+						if (main_grid->Rows[i]->Cells[j]->Value == nullptr)
+							throw 7;
+					}
+			}
+			catch (...)
+			{
+				not_full_label->Visible = true;
+			}
+			*/
+
+
+		
+	}
+
+	private: System::Void random_button_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		random_matrix();
+	}
+	
+	private: System::Void check_but_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		
+		if (task())
+			rez->Text = "ДА";
+		else
+			rez->Text = "НЕТ";
+
+		rez->ForeColor = System::Drawing::Color::Black;
+		
+		
+	}
+
+	
+	//private: System::Void main_grid_RowsAdded(System::Object^ sender, System::Windows::Forms::DataGridViewRowsAddedEventArgs^ e) 
+	//{
+		//not_full_label->Visible = true;
+		//check_but->Enabled = false;
+	//}
+
+	//private: System::Void main_grid_ColumnAdded(System::Object^ sender, System::Windows::Forms::DataGridViewColumnEventArgs^ e) 
+	//{
+	//	not_full_label->Visible = true;
+	//	check_but->Enabled = false;
+	//}
+
+	private: System::Void clear_button_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		rez->ForeColor = System::Drawing::Color::Yellow;
+
+		main_grid->Columns->Clear();
+		main_grid->Rows->Clear();
+		main_grid->RowCount = stroks;
+		main_grid->ColumnCount = colons;
+
+		not_full_label->Visible = true;
+		check_but->Enabled = false;
+	}
+	
+	
+	private: System::Void main_grid_CellValueChanged(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e) 
+	{
+		rez->ForeColor = System::Drawing::Color::Yellow;
+
+		int i; int j;
+
+		try
+		{
+			not_full_label->Visible = false;
+			ANGRY_BUTTON->Visible = false;
+
+			for (i = 0; i < stroks; i++)
+				for (j = 0; j < colons; j++)
+				{
+					if (main_grid->Rows[i]->Cells[j]->Value == nullptr)
+						throw 7;
+					Convert::ToInt32(main_grid->Rows[i]->Cells[j]->Value);
+				}
+			active_buttons();
+			refresh->Enabled = false;
+		}
+
+		catch (...)
+		{
+			check_but->Enabled = false;
+
+			if (main_grid->Rows[i]->Cells[j]->Value == nullptr)
+			{
+				not_full_label->Visible = true;
+			}
+			else
+				ANGRY_BUTTON->Visible = true;
+
+		}
+	}
+};
+}
